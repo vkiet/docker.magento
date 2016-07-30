@@ -1,0 +1,28 @@
+web:
+  image:  nginx:latest
+  ports:
+    - "9999:80"
+  volumes:
+    - ./code:/code
+    - ./nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf
+  links:
+    - php
+    - db
+
+php:
+  image: php:7-fpm
+  volumes:
+    - ./code:/code
+    - ./php/php.ini:/usr/local/etc/php
+  links:
+    - db
+
+db:
+  image: mysql:5.7
+  volumes:
+    - ./db:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: magento
+    MYSQL_DATABASE: magento
+    MYSQL_USER: magento
+    MYSQL_PASSWORD: magento

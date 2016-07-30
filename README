@@ -1,0 +1,4 @@
+docker exec -ti magento_php_1 bash
+php bin/magento setup:static-content:deploy
+
+chmod 777 -R var
