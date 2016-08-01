@@ -1,26 +1,28 @@
 web:
-  image:  nginx:latest
+  image:  kp/nginx:2
   ports:
-    - "9999:80"
+    - "8008:80"
   volumes:
-    - ./code:/code
-    - ./nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf
+   # - ~/projects/magento/conf/compose/code:/code
+    - ~/projects/magento/source:/code
+    - ~/projects/magento/conf/compose/nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf
+    - ~/projects/magento/conf/compose/nginx/nginx.conf:/etc/nginx/nginx.conf
   links:
     - php
-    - db
 
 php:
-  image: php:7-fpm
+  image: kp/php:2
   volumes:
-    - ./code:/code
-    - ./php/php.ini:/usr/local/etc/php
+   # - ~/projects/magento/conf/compose/code:/code
+    - ~/projects/magento/source:/code
+    - ~/projects/magento/conf/compose/php:/usr/local/etc/php/
   links:
     - db
 
 db:
   image: mysql:5.7
   volumes:
-    - ./db:/var/lib/mysql
+    - ~/projects/magento/database:/var/lib/mysql
   environment:
     MYSQL_ROOT_PASSWORD: magento
     MYSQL_DATABASE: magento
