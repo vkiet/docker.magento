@@ -4,7 +4,7 @@ web:
     - "8888:80"
   volumes:
     #- ~/Projects/docker.magento/code:/code
-    - ~/Projects/vee:/code
+    - ~/Projects/magento2:/code
     - ~/Projects/docker.magento/nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf
     - ~/Projects/docker.magento/nginx/nginx.conf:/etc/nginx/nginx.conf
   links:
@@ -14,7 +14,7 @@ php:
   image: vkiet/php
   volumes:
     #- ~/Projects/docker.magento/code:/code
-    - ~/Projects/vee:/code
+    - /home/superjo/Projects/magento2:/code
     - ~/Projects/docker.magento/php/php.ini:/usr/local/etc/php/php.ini
   links:
     - db
